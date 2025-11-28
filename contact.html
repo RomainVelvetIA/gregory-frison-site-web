@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Contactez Valeurs & Patrimoine - Votre conseiller en gestion de patrimoine à Bourges">
+    <title>Contact - Valeurs & Patrimoine</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        .contact-form-section {
+            padding: var(--spacing-xl) 0;
+            background: var(--bg-light);
+        }
+
+        .contact-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--radius-md);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-message {
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            display: none;
+        }
+
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .contact-info-card {
+            background: var(--bg-white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .contact-info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .contact-info-card a {
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .contact-info-card a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpeg" alt="Valeurs & Patrimoine" class="logo-img">
+            </a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="notre-cabinet.html" class="nav-link">Notre cabinet</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        Nos expertises
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="audit-patrimonial.html" class="dropdown-link">Audit patrimonial</a>
+                        <a href="assistance-administrative.html" class="dropdown-link">Assistance administrative</a>
+                        <a href="epargne-et-placements.html" class="dropdown-link">Épargne et placements</a>
+                        <a href="immobilier.html" class="dropdown-link">Immobilier</a>
+                        <a href="sante-prevoyance.html" class="dropdown-link">Santé/prévoyance</a>
+                        <a href="majeurs-proteges.html" class="dropdown-link">Majeurs protégés</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="blog.html" class="nav-link">Blog</a>
+                </div>
+                <div class="nav-item">
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="hero" style="min-height: 50vh;">
+
+        <div class="hero-content">
+            <h1 class="hero-title">CONTACTEZ-NOUS</h1>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section class="contact-form-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Envoyez-nous un message</h2>
+            <p class="text-center mb-4">Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs
+                délais.</p>
+
+            <div class="contact-form-container">
+                <div id="formMessage" class="form-message"></div>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="nom">Nom complet *</label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telephone">Téléphone *</label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT INFO SECTION -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-4">Nos coordonnées</h2>
+            <div class="contact-info-grid">
+                <div class="contact-info-card">
+                    <h3>📍 Adresse</h3>
+                    <p>
+                        <a href="https://maps.app.goo.gl/uVX5uWMZ4AeFSut89" target="_blank">
+                            12 ruelle des Gats<br>
+                            18000 Bourges
+                        </a>
+                    </p>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>📞 Téléphone</h3>
+                    <p>
+                        <a href="tel:0770147798">07 70 14 77 98</a>
+                    </p>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>✉️ Email</h3>
+                    <p>
+                        <a href="mailto:valeursetpatrimoine@outlook.fr">valeursetpatrimoine@outlook.fr</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VALEURS & PATRIMOINE</h4>
+                    <p>
+                        Votre conseiller en gestion de patrimoine indépendant à Bourges.
+                        Nous vous accompagnons dans tous vos projets patrimoniaux.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>ADRESSE</h4>
+                    <p>
+                        <a href="https://maps.app.goo.gl/uVX5uWMZ4AeFSut89" target="_blank">
+                            12 ruelle des Gats<br>
+                            18000 Bourges
+                        </a>
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT</h4>
+                    <p>
+                        <a href="tel:0770147798">07 70 14 77 98</a><br>
+                        <a href="mailto:valeursetpatrimoine@outlook.fr">valeursetpatrimoine@outlook.fr</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <span>-</span>
+                    <a href="#">Cookies</a>
+                    <span>-</span>
+                    <a href="#">Politique de confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Article de blog - Valeurs & Patrimoine">
+    <title>Article - Valeurs & Patrimoine</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .article-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-dark);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .article-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-md);
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .article-content p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-bottom: var(--spacing-md);
+            padding-left: var(--spacing-lg);
+        }
+
+        .article-content li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: var(--spacing-lg);
+            font-weight: 500;
+            transition: color var(--transition-fast);
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--text-light);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpeg" alt="Valeurs & Patrimoine" class="logo-img">
+            </a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="notre-cabinet.html" class="nav-link">Notre cabinet</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        Nos expertises
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="audit-patrimonial.html" class="dropdown-link">Audit patrimonial</a>
+                        <a href="assistance-administrative.html" class="dropdown-link">Assistance administrative</a>
+                        <a href="epargne-et-placements.html" class="dropdown-link">Épargne et placements</a>
+                        <a href="immobilier.html" class="dropdown-link">Immobilier</a>
+                        <a href="sante-prevoyance.html" class="dropdown-link">Santé/prévoyance</a>
+                        <a href="majeurs-proteges.html" class="dropdown-link">Majeurs protégés</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="blog.html" class="nav-link active">Blog</a>
+                </div>
+                <div class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ARTICLE SECTION -->
+    <section class="section" style="padding-top: 120px;">
+        <div class="container">
+            <a href="blog.html" class="back-link">← Retour au blog</a>
+
+            <div id="article-container">
+                <div class="loading-spinner">Chargement de l'article...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>VALEURS & PATRIMOINE</h4>
+                    <p>
+                        Votre conseiller en gestion de patrimoine indépendant à Bourges.
+                        Nous vous accompagnons dans tous vos projets patrimoniaux.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>ADRESSE</h4>
+                    <p>
+                        <a href="https://maps.app.goo.gl/uVX5uWMZ4AeFSut89" target="_blank">
+                            12 ruelle des Gats<br>
+                            18000 Bourges
+                        </a>
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT</h4>
+                    <p>
+                        <a href="tel:0770147798">07 70 14 77 98</a><br>
+                        <a href="mailto:valeursetpatrimoine@outlook.fr">valeursetpatrimoine@outlook.fr</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <span>-</span>
+                    <a href="#">Cookies</a>
+                    <span>-</span>
+                    <a href="#">Politique de confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+    <!-- Sanity Client & Portable Text -->
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@sanity/client';
+        import imageUrlBuilder from 'https://esm.sh/@sanity/image-url';
+        import { toHTML } from 'https://esm.sh/@portabletext/to-html';
+
+        const client = createClient({
+            projectId: 'ozci0HQp9',
+            dataset: 'production',
+            useCdn: true,
+            apiVersion: '2023-05-03'
+        });
+
+        const builder = imageUrlBuilder(client);
+
+        function urlFor(source) {
+            return builder.image(source);
+        }
+
+        async function fetchArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+
+            if (!slug) {
+                window.location.href = 'blog.html';
+                return;
+            }
+
+            const query = `*[_type == "post" && slug.current == $slug][0] {
+                title,
+                mainImage,
+                publishedAt,
+                body
+            }`;
+
+            try {
+                const post = await client.fetch(query, { slug });
+
+                if (!post) {
+                    document.getElementById('article-container').innerHTML = '<p class="text-center">Article non trouvé.</p>';
+                    return;
+                }
+
+                renderArticle(post);
+            } catch (error) {
+                console.error('Error fetching article:', error);
+                document.getElementById('article-container').innerHTML = '<p class="text-center">Impossible de charger l\'article.</p>';
+            }
+        }
+
+        function renderArticle(post) {
+            const container = document.getElementById('article-container');
+
+            const date = new Date(post.publishedAt).toLocaleDateString('fr-FR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const imageUrl = post.mainImage
+                ? urlFor(post.mainImage).width(1200).height(600).url()
+                : null;
+
+            const bodyHtml = toHTML(post.body);
+
+            container.innerHTML = `
+                <article>
+                    <header class="article-header">
+                        <div class="article-date">${date}</div>
+                        <h1 class="article-title">${post.title}</h1>
+                    </header>
+                    
+                    ${imageUrl ? `<img src="${imageUrl}" alt="${post.title}" class="article-image">` : ''}
+                    
+                    <div class="article-content">
+                        ${bodyHtml}
+                    </div>
+                </article>
+            `;
+
+            // Update page title
+            document.title = `${post.title} - Valeurs & Patrimoine`;
+        }
+
+        fetchArticle();
+    </script>
+</body>
+
+</html>
