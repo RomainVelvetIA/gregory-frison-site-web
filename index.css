@@ -5,20 +5,24 @@
 /* === CSS VARIABLES === */
 :root {
   /* Colors */
-  --primary-color: #1a3a52;
-  --primary-dark: #0f2838;
-  --primary-light: #2d5470;
-  --accent-color: #3d6b8f;
+  --primary-color: #4169E1;
+  /* Royal Blue */
+  --primary-dark: #003399;
+  /* Darker Royal Blue */
+  --primary-light: #6495ED;
+  /* Cornflower Blue */
+  --accent-color: #0047AB;
+  /* Cobalt */
   --text-dark: #1a1a1a;
   --text-light: #666666;
   --text-white: #ffffff;
   --bg-white: #ffffff;
   --bg-light: #f8f9fa;
-  --bg-overlay: rgba(26, 58, 82, 0.9);
+  --bg-overlay: rgba(0, 51, 153, 0.9);
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #1a3a52 0%, #2d5470 100%);
-  --gradient-overlay: linear-gradient(135deg, rgba(26, 58, 82, 0.95) 0%, rgba(45, 84, 112, 0.9) 100%);
+  --gradient-primary: linear-gradient(135deg, #4169E1 0%, #003399 100%);
+  --gradient-overlay: linear-gradient(135deg, rgba(65, 105, 225, 0.95) 0%, rgba(0, 51, 153, 0.9) 100%);
 
   /* Typography */
   --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -186,7 +190,7 @@ a:hover {
 
 .nav-link {
   padding: var(--spacing-xs) var(--spacing-sm);
-  color: var(--text-dark);
+  color: var(--primary-dark);
   font-weight: 500;
   position: relative;
   transition: color var(--transition-fast);
@@ -306,7 +310,7 @@ a:hover {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #050b14 0%, #0d1119 50%, #060e15 100%);
+  background: var(--gradient-primary);
   padding: var(--spacing-xl) var(--spacing-md);
 }
 
