@@ -34,6 +34,40 @@
             margin-bottom: var(--spacing-sm);
         }
 
+        /* NEW META STYLES */
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .meta-separator {
+            color: #ddd;
+        }
+
+        .article-categories {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .category-tag {
+            background: #eef2ff;
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .article-title {
             font-size: clamp(2rem, 4vw, 3rem);
             color: var(--primary-dark);
@@ -219,10 +253,10 @@
         import { toHTML } from 'https://esm.sh/@portabletext/to-html';
 
         const client = createClient({
-            projectId: 'ozci0HQp9',
+            projectId: 'dqtbx1zh',
             dataset: 'production',
-            useCdn: true,
-            apiVersion: '2023-05-03'
+            useCdn: false, // Disabled CDN for local development
+            apiVersion: '2024-01-01'
         });
 
         const builder = imageUrlBuilder(client);
@@ -244,6 +278,10 @@
                 title,
                 mainImage,
                 publishedAt,
+                metaDescription,
+                readingTime,
+                author->{name, image},
+                categories[]->{title},
                 body
             }`;
 
@@ -263,6 +301,12 @@
         }
 
         function renderArticle(post) {
+            // Update Meta Description
+            const metaDescFn = document.querySelector('meta[name="description"]');
+            if (metaDescFn && post.metaDescription) {
+                metaDescFn.setAttribute('content', post.metaDescription);
+            }
+
             const container = document.getElementById('article-container');
 
             const date = new Date(post.publishedAt).toLocaleDateString('fr-FR', {
@@ -275,13 +319,29 @@
                 ? urlFor(post.mainImage).width(1200).height(600).url()
                 : null;
 
+            const authorName = post.author ? post.author.name : 'Valeurs & Patrimoine';
+            const categoriesHtml = post.categories
+                ? `<div class="article-categories">${post.categories.map(cat => `<span class="category-tag">${cat.title}</span>`).join('')}</div>`
+                : '';
+            const readingTimeHtml = post.readingTime
+                ? `<span class="reading-time">⏱️ ${post.readingTime} min de lecture</span>`
+                : '';
+
             const bodyHtml = toHTML(post.body);
 
             container.innerHTML = `
                 <article>
                     <header class="article-header">
-                        <div class="article-date">${date}</div>
+                        <div class="article-meta-top">
+                            ${categoriesHtml}
+                        </div>
                         <h1 class="article-title">${post.title}</h1>
+                        <div class="article-meta">
+                            <span class="meta-date">📅 ${date}</span>
+                            <span class="meta-separator">•</span>
+                            ${readingTimeHtml ? `${readingTimeHtml} <span class="meta-separator">•</span>` : ''}
+                            <span class="meta-author">✍️ ${authorName}</span>
+                        </div>
                     </header>
                     
                     ${imageUrl ? `<img src="${imageUrl}" alt="${post.title}" class="article-image">` : ''}

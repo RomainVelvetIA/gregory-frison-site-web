@@ -20,77 +20,135 @@
     <style>
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
             margin-top: var(--spacing-lg);
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 1024px) {
+            .blog-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .blog-card {
-            background: var(--bg-white);
-            border-radius: var(--radius-lg);
+            background: #ffffff;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: all var(--transition-normal);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             height: 100%;
+            cursor: pointer;
         }
 
         .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
         }
 
         .blog-image {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
-            background-color: #f0f0f0;
+            background-color: #f5f5f5;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+
+        .card-category {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--primary-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.5px;
+            z-index: 1;
         }
 
         .blog-content {
-            padding: var(--spacing-md);
+            padding: 1.5rem;
             flex: 1;
             display: flex;
             flex-direction: column;
-        }
-
-        .blog-date {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: var(--spacing-xs);
+            gap: 0.75rem;
         }
 
         .blog-title {
             font-size: 1.25rem;
-            margin-bottom: var(--spacing-sm);
-            color: var(--primary-dark);
-            line-height: 1.4;
-        }
-
-        .blog-excerpt {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: var(--spacing-md);
-            flex: 1;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            color: #1a1a1a;
+            line-height: 1.3;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .blog-link {
-            color: var(--primary-color);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap var(--transition-fast);
+        .blog-excerpt {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            position: relative;
+            margin: 0;
         }
 
-        .blog-link:hover {
-            gap: 0.75rem;
+        .blog-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .blog-date {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .card-reading-time {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .meta-separator {
+            color: #ddd;
         }
 
         .loading-spinner {
@@ -211,10 +269,10 @@
         import imageUrlBuilder from 'https://esm.sh/@sanity/image-url';
 
         const client = createClient({
-            projectId: 'ozci0HQp9', // Provided by user
+            projectId: 'dqtbx1zh', // Provided by user
             dataset: 'production',
-            useCdn: true,
-            apiVersion: '2023-05-03'
+            useCdn: false, // Disabled CDN for local development
+            apiVersion: '2024-01-01'
         });
 
         const builder = imageUrlBuilder(client);
@@ -229,7 +287,9 @@
                 slug,
                 mainImage,
                 publishedAt,
-                excerpt
+                excerpt,
+                readingTime,
+                categories[]->{title}
             }`;
 
             try {
@@ -260,14 +320,29 @@
                     ? urlFor(post.mainImage).width(600).height(400).url()
                     : 'https://via.placeholder.com/600x400?text=Pas+d+image';
 
+                // Categories Badge
+                const categoriesHtml = post.categories && post.categories.length > 0
+                    ? `<span class="card-category">${post.categories[0].title}</span>`
+                    : '';
+
+                // Reading Time
+                const readingTimeHtml = post.readingTime
+                    ? `<span class="meta-separator">•</span><span class="card-reading-time">⏱️ ${post.readingTime} min</span>`
+                    : '';
+
                 return `
-                    <article class="blog-card">
-                        <img src="${imageUrl}" alt="${post.title}" class="blog-image">
+                    <article class="blog-card" onclick="window.location.href='article.html?slug=${post.slug.current}'" style="text-decoration: none;">
+                        <div class="card-image-wrapper">
+                            ${categoriesHtml}
+                            <img src="${imageUrl}" alt="${post.title}" class="blog-image">
+                        </div>
                         <div class="blog-content">
-                            <div class="blog-date">${date}</div>
                             <h3 class="blog-title">${post.title}</h3>
                             <p class="blog-excerpt">${post.excerpt || ''}</p>
-                            <a href="article.html?slug=${post.slug.current}" class="blog-link">Lire la suite →</a>
+                            <div class="blog-meta-row">
+                                <span class="blog-date">${date}</span>
+                                ${readingTimeHtml}
+                            </div>
                         </div>
                     </article>
                 `;
