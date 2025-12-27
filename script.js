@@ -154,20 +154,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Get form data
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-
+            const params = new URLSearchParams();
+            for (const [key, value] of formData.entries()) {
+                params.append(key, value);
+            }
             // Add timestamp
-            data.timestamp = new Date().toISOString();
+            params.append('timestamp', new Date().toISOString());
 
             try {
                 // Use no-cors mode for Google Apps Script
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
+                    body: params
                 });
 
                 // Show success message
