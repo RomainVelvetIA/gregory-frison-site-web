@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Google Sheets Contact Form Submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLlnwoXkUJW4QUOBxMvVUHch7nbf-hWx-5fQkA_BIilFh1sTDm-_f3g-rcyNCClW1y/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLTZ4iCBXivqcNQ5s_YMjlateIW0sXuvKgFy5Y6UQLJX2INhdOrwynP16FlmAwnJ4/exec';
 
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
